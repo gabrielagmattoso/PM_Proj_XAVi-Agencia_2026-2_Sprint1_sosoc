@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="UnMzOEOB7obDVfdbdmjI">
+    <mxGraphModel grid="1" page="1" gridSize="12" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zjM1N4t0IPmTC74JG1aV-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Bilhete&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="510" x="150" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zjM1N4t0IPmTC74JG1aV-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Responsabilidades&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="150" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="zjM1N4t0IPmTC74JG1aV-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Colaboracoes&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="260" x="400" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="zjM1N4t0IPmTC74JG1aV-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;-Criar codigo proprio&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;-Get codigo&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;-Registrar bilhete a partir&amp;nbsp; da origem do voo&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;-Calcular e gerar preco de venda dos bilhetes&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;-Registrar voos em nome de determinado cliente&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;-A partir da data do voo, definir possibilidade de compra do bilhete&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;-Averiguar possibilidade de voos consectuvios , a partir de origem e destino.&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="340" width="250" x="150" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="zjM1N4t0IPmTC74JG1aV-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;-Voo:Rotas,origem,destino,data e preco do voo&lt;/font&gt;" vertex="1">
+          <mxGeometry height="340" width="260" x="400" y="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
