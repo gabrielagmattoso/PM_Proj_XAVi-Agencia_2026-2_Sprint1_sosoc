@@ -5,10 +5,10 @@ public class Cliente {
     private String nome;
     private String sobrenome;
     private List<Bilhete> bilhetes;
-    private static int proximoregistro = 1;
+    private static int proximoRegistro = 1;
 
     public Cliente(String nome , String sobrenome ){
-        this.registro = proximoregistro++ ;
+        this.registro = proximoRegistro++ ;
         this.nome = nome ;
         this.sobrenome = sobrenome;
         this.bilhetes = new ArrayList<>();
@@ -26,7 +26,7 @@ public class Cliente {
         return sobrenome;
     }
 
-    public void adicionarBilhete (Bilhete bilhete){
+    public void registrarBilhete (Bilhete bilhete){
         bilhetes.add(bilhete);
     }
 
