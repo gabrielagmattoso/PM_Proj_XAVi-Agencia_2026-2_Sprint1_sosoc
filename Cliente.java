@@ -5,17 +5,17 @@ public class Cliente {
     private String nome;
     private String sobrenome;
     private List<Bilhete> bilhetes;
-    private static int proximoregistro = 1;
+    private static int proximoRegistro = 1;
 
     public Cliente(String nome , String sobrenome ){
-        this.registro = proximoregistro++ ;
+        this.registro = proximoRegistro++ ;
         this.nome = nome ;
         this.sobrenome = sobrenome;
         this.bilhetes = new ArrayList<>();
     }
 
-    public int  getId (){
-        return id;
+    public int  getRegistro (){
+        return registro;
     }
 
     public String getNome (){
@@ -26,7 +26,7 @@ public class Cliente {
         return sobrenome;
     }
 
-    public void adicionarBilhete (Bilhete bilhete){
+    public void registrarBilhete (Bilhete bilhete){
         bilhetes.add(bilhete);
     }
 
@@ -35,7 +35,10 @@ public class Cliente {
     }
 
     public Double totalGasto (){ 
-        return this.bilhetes[bilhetes.size() - 1].precoVenda();
+          if (this.bilhetes.isEmpty()) {
+            throw new IllegalStateException("O cliente não possui bilhetes cadastrados.");
+        }
+        return this.bilhetes.get(bilhetes.size() - 1).precoVenda();
 
     }
 
