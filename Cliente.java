@@ -14,8 +14,8 @@ public class Cliente {
         this.bilhetes = new ArrayList<>();
     }
 
-    public int  getId (){
-        return id;
+    public int  getRegistro (){
+        return registro;
     }
 
     public String getNome (){
@@ -35,7 +35,10 @@ public class Cliente {
     }
 
     public Double totalGasto (){ 
-        return this.bilhetes[bilhetes.size() - 1].precoVenda();
+          if (this.bilhetes.isEmpty()) {
+            throw new IllegalStateException("O cliente não possui bilhetes cadastrados.");
+        }
+        return this.bilhetes.get(bilhetes.size() - 1).precoVenda();
 
     }
 
