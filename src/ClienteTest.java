@@ -1,4 +1,3 @@
-package src;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,8 +41,8 @@ public class ClienteTest {
         Bilhete primeiroBilhete = new Bilhete(cliente);
         Bilhete ultimoBilhete = new Bilhete(cliente);
 
-        cliente.adicionarBilhete(primeiroBilhete);
-        cliente.adicionarBilhete(ultimoBilhete);
+        cliente.registrarBilhete(primeiroBilhete);
+        cliente.registrarBilhete(ultimoBilhete);
 
         assertEquals(2, cliente.getBilhetes().size());
         assertTrue(cliente.getBilhetes().contains(primeiroBilhete));
