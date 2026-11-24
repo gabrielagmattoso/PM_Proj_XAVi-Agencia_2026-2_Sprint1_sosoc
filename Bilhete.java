@@ -53,3 +53,52 @@ class Bilhete {
         LocalDate dia = anterior.getData();
         boolean dataValida = !novo.getData().isBefore(dia)
                           && !novo.getData().isAfter(dia.plusDays(1));
+        return novo.getOrigem() == anterior.getDestino() && dataValida;
+    }
+
+    public boolean adicionarVoo(Voo v) {
+        if (v == null || !v.temVaga()) {
+            return false;
+        }
+        if (!voos.isEmpty() && !voosConsecutivos(voos.get(voos.size() - 1), v)) {
+            return false;
+        }
+        voos.add(v);
+        return true;
+    }
+
+    public boolean temVagas() {
+        if (voos.isEmpty()) {
+            return false;
+        }
+        for (Voo v : voos) {
+            if (!v.temVaga()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public double precoVenda() {
+        if (voos.isEmpty()) {
+            return 0;
+        }
+        double soma = 0;
+        double maior = 0;
+        double segundo = 0;
+        for (Voo v : voos) {
+            double preco = v.getPrecoBase();
+            soma += preco;
+            if (preco > maior) {
+                segundo = maior;
+                maior = preco;
+            } else if (preco > segundo) {
+                segundo = preco;
+            }
+        }
+        if (voos.size() == 1) {
+            return soma;
+        }
+        return 0.6 * maior + 0.4 * segundo + 0.1 * (soma - maior - segundo);
+    }
+}
