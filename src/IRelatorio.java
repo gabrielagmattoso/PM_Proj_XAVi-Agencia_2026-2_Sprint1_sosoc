@@ -1,5 +1,5 @@
 package src;
 
-public interface Relatorio {
+public interface IRelatorio {
     String gerarRelatorio();
 }
