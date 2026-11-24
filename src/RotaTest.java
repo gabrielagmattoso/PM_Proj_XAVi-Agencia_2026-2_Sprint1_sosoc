@@ -20,9 +20,9 @@ public class RotaTest {
     @Test
     void origemEDestinoDevemSerGuardados() {
         rota.DefinirOrigem(Cidade.BELO_HORIZONTE);
-        rota.DefinirDestino(Cidade.SAO_PAULO);
+        rota.DefinirDestino(Cidade.FORTALEZA);
         assertSame(Cidade.BELO_HORIZONTE, rota.getOrigem());
-        assertSame(Cidade.SAO_PAULO, rota.getDestino());
+        assertSame(Cidade.FORTALEZA, rota.getDestino());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class RotaTest {
 
     @Test
     void naoDeveDefinirDestinoDuasVezes() {
-        rota.DefinirDestino(Cidade.SAO_PAULO);
+        rota.DefinirDestino(Cidade.FORTALEZA);
         assertThrows(IllegalArgumentException.class, () -> rota.DefinirDestino(Cidade.RECIFE));
     }
 
@@ -71,11 +71,11 @@ public class RotaTest {
     @Test
     void resetarDeveLimparEPermitirRedefinir() {
         rota.DefinirOrigem(Cidade.BELO_HORIZONTE);
-        rota.DefinirDestino(Cidade.SAO_PAULO);
+        rota.DefinirDestino(Cidade.FORTALEZA);
         rota.DefinirMinutosRota(150);
         rota.ResetarRota();
         assertThrows(IllegalArgumentException.class, () -> rota.getOrigem());
-        assertDoesNotThrow(() -> rota.DefinirOrigem(Cidade.SAO_PAULO));
+        assertDoesNotThrow(() -> rota.DefinirOrigem(Cidade.FORTALEZA));
         assertEquals("R001", rota.getCodigo());
     }
 }
