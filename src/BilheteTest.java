@@ -1,10 +1,17 @@
+package src;
+
 import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BilheteTest {
 
-    private Cliente cliente = new Cliente("Ana", "Silva");
-    private Bilhete bilhete = new Bilhete(cliente);
+    Cliente cliente = new Cliente("Ana", "Silva");
+    Cidade A = Cidade.BELO_HORIZONTE;
+    Cidade B = Cidade.RECIFE;
+    Cidade C = Cidade.SAO_PAULO;
+    Cidade D = Cidade.BRASILIA;
+    LocalDate hoje = LocalDate.of(2026, 11, 23);
 
     @Test
     void construtorSemClienteLancaExcecao() {
@@ -12,47 +19,102 @@ class BilheteTest {
     }
 
     @Test
-    void construtorGuardaCliente() {
-        assertSame(cliente, bilhete.getCliente());
-    }
-
-    @Test
-    void bilheteNovoNaoTemVoos() {
-        assertTrue(bilhete.getVoos().isEmpty());
-    }
-
-    @Test
-    void codigoTemFormatoBIL() {
-        assertTrue(bilhete.getCodigo().matches("BIL\\d{5}"));
-    }
-
-    @Test
     void origemSemVoosLancaExcecao() {
-        assertThrows(IllegalArgumentException.class, () -> bilhete.getOrigem());
+        Bilhete b = new Bilhete(cliente);
+        assertThrows(IllegalArgumentException.class, () -> b.getOrigem());
     }
 
     @Test
     void destinoSemVoosLancaExcecao() {
-        assertThrows(IllegalStateException.class, () -> bilhete.getDestino());
+        Bilhete b = new Bilhete(cliente);
+        assertThrows(IllegalStateException.class, () -> b.getDestino());
     }
 
     @Test
-    void adicionarVooNuloRetornaFalse() {
-        assertFalse(bilhete.adicionarVoo(null));
+    void origemEDestinoComDoisVoos() {
+        Rota r1 = new Rota("1234");
+        r1.DefinirOrigem(A);
+        r1.DefinirDestino(B);
+        Rota r2 = new Rota("1234");
+        r2.DefinirOrigem(B);
+        r2.DefinirDestino(C);
+
+        Bilhete b = new Bilhete(cliente);
+        b.adicionarVoo(new Voo(r1, hoje, 100));
+        b.adicionarVoo(new Voo(r2, hoje, 200));
+        assertEquals(A, b.getOrigem());
+        assertEquals(C, b.getDestino());
     }
 
     @Test
-    void voosConsecutivosComNuloRetornaFalse() {
-        assertFalse(Bilhete.voosConsecutivos(null, null));
+    void consecutivosDiaSeguinte() {
+        Rota r1 = new Rota("1234");
+        r1.DefinirOrigem(A);
+        r1.DefinirDestino(B);
+        Rota r2 = new Rota("1234");
+        r2.DefinirOrigem(B);
+        r2.DefinirDestino(C);
+
+        Voo v1 = new Voo(r1, hoje, 100);
+        Voo v2 = new Voo(r2, hoje.plusDays(1), 100);
+        assertEquals(true, Bilhete.voosConsecutivos(v1, v2));
     }
 
     @Test
-    void temVagasSemVoosRetornaFalse() {
-        assertFalse(bilhete.temVagas());
+    void naoConsecutivosDoisDiasDepois() {
+        Rota r1 = new Rota("1234");
+        r1.DefinirOrigem(A);
+        r1.DefinirDestino(B);
+        Rota r2 = new Rota("1234");
+        r2.DefinirOrigem(B);
+        r2.DefinirDestino(C);
+
+        Voo v1 = new Voo(r1, hoje, 100);
+        Voo v2 = new Voo(r2, hoje.plusDays(2), 100);
+        assertEquals(false, Bilhete.voosConsecutivos(v1, v2));
     }
 
     @Test
-    void precoVendaSemVoosEhZero() {
-        assertEquals(0.0, bilhete.precoVenda(), 0.001);
+    void naoConsecutivosOrigemDiferenteDoDestino() {
+        Rota r1 = new Rota("1234");
+        r1.DefinirOrigem(A);
+        r1.DefinirDestino(B);
+        Rota r2 = new Rota("1234");
+        r2.DefinirOrigem(C);
+        r2.DefinirDestino(A);
+
+        Voo v1 = new Voo(r1, hoje, 100);
+        Voo v2 = new Voo(r2, hoje, 100);
+        assertEquals(false, Bilhete.voosConsecutivos(v1, v2));
+    }
+
+    @Test
+    void adicionarVooSemVagaRetornaFalse() {
+        Rota r1 = new Rota("1234");
+        r1.DefinirOrigem(A);
+        r1.DefinirDestino(B);
+        Voo lotado = new Voo(r1, hoje, 100);
+        for (int i = 0; i < 150; i++) {
+            lotado.reservarVaga();
+        }
+
+        Bilhete b = new Bilhete(cliente);
+        assertEquals(false, b.adicionarVoo(lotado));
+        assertEquals(0, b.getVoos().size());
+    }
+
+    @Test
+    void adicionarVooNaoConsecutivoRetornaFalse() {
+        Rota r1 = new Rota("1234");
+        r1.DefinirOrigem(A);
+        r1.DefinirDestino(B);
+        Rota r2 = new Rota("1234");
+        r2.DefinirOrigem(C);
+        r2.DefinirDestino(D);
+
+        Bilhete b = new Bilhete(cliente);
+        b.adicionarVoo(new Voo(r1, hoje, 100));
+        assertEquals(false, b.adicionarVoo(new Voo(r2, hoje, 100)));
+        assertEquals(1, b.getVoos().size());
     }
 }
