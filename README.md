@@ -6,3 +6,9 @@ Sistema de gerenciamento da XAVi (Xulambs Agência de Viagens), desenvolvido com
 **Branch:** 'dudaSilva/Tarefa3'
 **Arquivo:** 'Voo.java'
 **Status:** classe implementada conforme UML. Os testes ainda não foram adicionados.
+
+## Classe 'VooTest'
+### 23/11/2026
+**Branch:** 'dudaSilva/Tarefa3'
+**Status:** classe `Voo` e testes (`VooTest.java`) concluídos. Os 9 testes passam, mas após ajustar erros pontuais cometidos.
+- Primeira execução: 5 testes passaram e 4 falharam (os de getters). A causa estava no próprio teste, e não no `Voo`: os valores usados para criar o voo e a rota eram diferentes dos valores esperados nas verificações. Corrigido, e todos passam.
