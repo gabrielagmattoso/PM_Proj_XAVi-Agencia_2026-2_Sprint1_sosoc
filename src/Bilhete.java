@@ -29,21 +29,21 @@ public class Bilhete {
         return voos;
     }
 
-    public Cidade getOrigem() {
+    public ECidade getOrigem() {
         if (voos.isEmpty()) {
             throw new IllegalArgumentException("Bilhete sem voos");
         }
         Voo primeiroVoo = voos.get(0);
-        Cidade origem = primeiroVoo.getOrigem();
+        ECidade origem = primeiroVoo.getOrigem();
         return origem;
     }
 
-    public Cidade getDestino() {
+    public ECidade getDestino() {
         if (voos.isEmpty()) {
             throw new IllegalStateException("Bilhete sem voos");
         }
         Voo ultimoVoo = voos.get(voos.size() - 1);
-        Cidade destino = ultimoVoo.getDestino();
+        ECidade destino = ultimoVoo.getDestino();
         return destino;
     }
 

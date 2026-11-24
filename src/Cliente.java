@@ -3,7 +3,7 @@ package src;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente implements Relatorio {
+public class Cliente implements IRelatorio {
     private static int proximoRegistro = 1;
 
     private final int registro;

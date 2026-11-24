@@ -6,30 +6,29 @@ public class RotaTest {
 
     @Test
     void construtorGuardaOrigemEDestino() {
-        Rota rota = new Rota(Cidade.BELO_HORIZONTE, Cidade.FORTALEZA);
-        assertSame(Cidade.BELO_HORIZONTE, rota.getOrigem());
-        assertSame(Cidade.FORTALEZA, rota.getDestino());
+        Rota rota = new Rota(ECidade.BELO_HORIZONTE, ECidade.FORTALEZA);
+        assertSame(ECidade.FORTALEZA, rota.getDestino());
     }
 
     @Test
     void construtorRejeitaCidadesNulasOuIguais() {
-        assertThrows(IllegalArgumentException.class, () -> new Rota(null, Cidade.FORTALEZA));
-        assertThrows(IllegalArgumentException.class, () -> new Rota(Cidade.BELO_HORIZONTE, null));
+        assertThrows(IllegalArgumentException.class, () -> new Rota(null, ECidade.FORTALEZA));
+        assertThrows(IllegalArgumentException.class, () -> new Rota(ECidade.BELO_HORIZONTE, null));
         assertThrows(IllegalArgumentException.class,
-                () -> new Rota(Cidade.RECIFE, Cidade.RECIFE));
+                () -> new Rota(ECidade.RECIFE, ECidade.RECIFE));
     }
 
     @Test
     void codigoRepresentaOsCodigosDeOrigemEDestino() {
-        Rota rota = new Rota(Cidade.BELO_HORIZONTE, Cidade.FORTALEZA);
+        Rota rota = new Rota(ECidade.BELO_HORIZONTE, ECidade.FORTALEZA);
         assertEquals("1321", rota.getCodigo());
     }
 
     @Test
     void deCodigoReconstruiRota() {
         Rota rota = Rota.deCodigo("1350");
-        assertSame(Cidade.BELO_HORIZONTE, rota.getOrigem());
-        assertSame(Cidade.RECIFE, rota.getDestino());
+        assertSame(ECidade.BELO_HORIZONTE, rota.getOrigem());
+        assertSame(ECidade.RECIFE, rota.getDestino());
         assertEquals("1350", rota.getCodigo());
     }
 

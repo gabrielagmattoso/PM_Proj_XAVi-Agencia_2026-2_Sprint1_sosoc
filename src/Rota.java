@@ -3,10 +3,10 @@ package src;
 import java.util.Locale;
 
 public class Rota {
-    private final Cidade origem;
-    private final Cidade destino;
+    private final ECidade origem;
+    private final ECidade destino;
 
-    public Rota(Cidade origem, Cidade destino) {
+    public Rota(ECidade origem, ECidade destino) {
         if (origem == null || destino == null) {
             throw new IllegalArgumentException("Rota precisa de origem e destino");
         }
@@ -17,11 +17,11 @@ public class Rota {
         this.destino = destino;
     }
 
-    public Cidade getOrigem() {
+    public ECidade getOrigem() {
         return origem;
     }
 
-    public Cidade getDestino() {
+    public ECidade getDestino() {
         return destino;
     }
 
@@ -42,8 +42,8 @@ public class Rota {
         if (codigo == null || !codigo.matches("[0-9]{4}")) {
             throw new IllegalArgumentException("Código de rota inválido: " + codigo);
         }
-        Cidade origem = Cidade.deCodigo(Integer.parseInt(codigo.substring(0, 2)));
-        Cidade destino = Cidade.deCodigo(Integer.parseInt(codigo.substring(2)));
+        ECidade origem = ECidade.deCodigo(Integer.parseInt(codigo.substring(0, 2)));
+        ECidade destino = ECidade.deCodigo(Integer.parseInt(codigo.substring(2)));
         return new Rota(origem, destino);
     }
 }

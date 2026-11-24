@@ -19,11 +19,11 @@ public class Voo {
         return rota.getCodigo();
     }
 
-    public Cidade getOrigem(){
+    public ECidade getOrigem(){
         return rota.getOrigem();    
     }
 
-    public Cidade getDestino(){
+    public ECidade getDestino(){
         return rota.getDestino();
     }
 

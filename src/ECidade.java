@@ -1,5 +1,5 @@
 package src;
-public enum Cidade {
+public enum ECidade {
     BELO_HORIZONTE(13),
     FORTALEZA(21),
     RECIFE(50),
@@ -9,7 +9,7 @@ public enum Cidade {
 
     private final int codigo;
 
-    Cidade(int codigo) {
+    ECidade(int codigo) {
         this.codigo = codigo;
     }
 
@@ -17,8 +17,8 @@ public enum Cidade {
         return codigo;
     }
 
-    public static Cidade deCodigo(int codigo) {
-        for (Cidade c : values()) {
+    public static ECidade deCodigo(int codigo) {
+        for (ECidade c : values()) {
             if (c.codigo == codigo) {
                 return c;
             }

@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class BilheteTest {
 
     Cliente cliente = new Cliente("Ana", "Silva");
-    Cidade A = Cidade.BELO_HORIZONTE;
-    Cidade B = Cidade.RECIFE;
-    Cidade C = Cidade.JOAO_PESSOA;
-    Cidade D = Cidade.NATAL;
+    ECidade A = ECidade.BELO_HORIZONTE;
+    ECidade B = ECidade.RECIFE;
+    ECidade C = ECidade.JOAO_PESSOA;
+    ECidade D = ECidade.NATAL;
     LocalDate hoje = LocalDate.of(2026, 11, 23);
 
-    private Rota criarRota(Cidade origem, Cidade destino) {
+    private Rota criarRota(ECidade origem, ECidade destino) {
         return new Rota(origem, destino);
     }
 

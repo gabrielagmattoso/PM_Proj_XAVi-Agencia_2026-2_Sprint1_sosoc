@@ -10,7 +10,7 @@ public class VooTest{
     private static final int CAPACIDADE = 150;
 
     private Rota criarRota(){
-        return new Rota(Cidade.BELO_HORIZONTE, Cidade.RECIFE);
+        return new Rota(ECidade.BELO_HORIZONTE, ECidade.RECIFE);
     }
 
     private Voo criarVoo(){
@@ -72,8 +72,8 @@ public class VooTest{
     @Test
     void getOrigemEGetDestinoDevolvemCidadesDaRota() {
         Voo voo = criarVoo();
-        assertEquals(Cidade.BELO_HORIZONTE, voo.getOrigem());
-        assertEquals(Cidade.RECIFE, voo.getDestino());
+        assertEquals(ECidade.BELO_HORIZONTE, voo.getOrigem());
+        assertEquals(ECidade.RECIFE, voo.getDestino());
     }
 
     @Test
