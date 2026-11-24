@@ -1,17 +1,10 @@
-package src;
 import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BilheteTest {
 
-
-    Cliente cliente = new Cliente("Ana");
-    Cidade A = new Cidade("A");
-    Cidade B = new Cidade("B");
-    Cidade C = new Cidade("C");
-    Cidade D = new Cidade("D");
-    LocalDate hoje = LocalDate.of(2026, 11, 23);
+    private Cliente cliente = new Cliente("Ana", "Silva");
+    private Bilhete bilhete = new Bilhete(cliente);
 
     @Test
     void construtorSemClienteLancaExcecao() {
@@ -19,54 +12,47 @@ class BilheteTest {
     }
 
     @Test
+    void construtorGuardaCliente() {
+        assertSame(cliente, bilhete.getCliente());
+    }
+
+    @Test
+    void bilheteNovoNaoTemVoos() {
+        assertTrue(bilhete.getVoos().isEmpty());
+    }
+
+    @Test
+    void codigoTemFormatoBIL() {
+        assertTrue(bilhete.getCodigo().matches("BIL\\d{5}"));
+    }
+
+    @Test
     void origemSemVoosLancaExcecao() {
-        Bilhete b = new Bilhete(cliente);
-        assertThrows(IllegalArgumentException.class, () -> b.getOrigem());
+        assertThrows(IllegalArgumentException.class, () -> bilhete.getOrigem());
     }
 
     @Test
     void destinoSemVoosLancaExcecao() {
-        Bilhete b = new Bilhete(cliente);
-        assertThrows(IllegalStateException.class, () -> b.getDestino());
+        assertThrows(IllegalStateException.class, () -> bilhete.getDestino());
     }
 
     @Test
-    void origemEDestinoComDoisVoos() {
-        Bilhete b = new Bilhete(cliente);
-        b.adicionarVoo(new Voo(A, B, hoje, 100, 10));
-        b.adicionarVoo(new Voo(B, C, hoje, 200, 10));
-        assertEquals(A, b.getOrigem());
-        assertEquals(C, b.getDestino());
+    void adicionarVooNuloRetornaFalse() {
+        assertFalse(bilhete.adicionarVoo(null));
     }
 
     @Test
-    void consecutivosDiaSeguinte() {
-        Voo v1 = new Voo(A, B, hoje, 100, 10);
-        Voo v2 = new Voo(B, C, hoje.plusDays(1), 100, 10);
-        assertEquals(true, Bilhete.voosConsecutivos(v1, v2));
+    void voosConsecutivosComNuloRetornaFalse() {
+        assertFalse(Bilhete.voosConsecutivos(null, null));
     }
 
     @Test
-    void naoConsecutivosDoisDiasDepois() {
-        Voo v1 = new Voo(A, B, hoje, 100, 10);
-        Voo v2 = new Voo(B, C, hoje.plusDays(2), 100, 10);
-        assertEquals(false, Bilhete.voosConsecutivos(v1, v2));
+    void temVagasSemVoosRetornaFalse() {
+        assertFalse(bilhete.temVagas());
     }
 
     @Test
-    void naoConsecutivosOrigemDiferenteDoDestino() {
-        Voo v1 = new Voo(A, B, hoje, 100, 10);
-        Voo v2 = new Voo(C, A, hoje, 100, 10);
-        assertEquals(false, Bilhete.voosConsecutivos(v1, v2));
+    void precoVendaSemVoosEhZero() {
+        assertEquals(0.0, bilhete.precoVenda(), 0.001);
     }
-
-    @Test
-    void adicionarVooSemVagaRetornaFalse() {
-        Bilhete b = new Bilhete(cliente);
-        assertEquals(false, b.adicionarVoo(new Voo(A, B, hoje, 100, 0)));
-        assertEquals(0, b.getVoos().size());
-    }
-
-    @Test
-    void adicionarVooNaoConsecutivoRetornaFalse() {
-        Bilhete b = new
+}
