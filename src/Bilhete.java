@@ -2,7 +2,7 @@ package src;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-class Bilhete {
+public class Bilhete {
     private String codigo;
     private Cliente cliente;
     private ArrayList<Voo> voos;
