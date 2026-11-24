@@ -27,6 +27,9 @@ public class Cliente {
     }
 
     public void registrarBilhete (Bilhete bilhete){
+        if(bilhete == null ){
+            throw new IllegalStateException("Bilhete inválido");
+        }
         bilhetes.add(bilhete);
     }
 

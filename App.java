@@ -16,8 +16,10 @@ public class App{
 
     }
 
-    public void cadastrarVoos(){
-        //todo
+    public String cadastrarVoos(Voo voo){  
+        return ("Voo para" + voo.getDestino() 
+                + "na data" + voo.getData() 
+                + "pelo valor de" + voo.getPrecoBase());
     }
 
     public void procurarVoos(){
@@ -28,8 +30,9 @@ public class App{
 
     }
 
-    public void comprarBilhete(){
-        //todo
+    public void comprarBilhete(Cliente cliente,Bilhete bilhete){
+        cliente.registrarBilhete(bilhete);
+        cliente.totalGasto();
     }
 
     public static void main(String[] args){
