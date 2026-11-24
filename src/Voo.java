@@ -46,11 +46,12 @@ public class Voo {
     }
 
     public void reservarVaga(){
+
         if (temVaga()){
             passageiros += 1;
         }
         else {
-            IO.print("Não é possível reservar vagas");
+            throw new IllegalArgumentException("Não é possível reservar vaga");
         }
     }
 }

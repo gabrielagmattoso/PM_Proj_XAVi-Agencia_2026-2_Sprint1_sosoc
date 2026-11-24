@@ -9,8 +9,8 @@ class BilheteTest {
     Cliente cliente = new Cliente("Ana", "Silva");
     Cidade A = Cidade.BELO_HORIZONTE;
     Cidade B = Cidade.RECIFE;
-    Cidade C = Cidade.SAO_PAULO;
-    Cidade D = Cidade.BRASILIA;
+    Cidade C = Cidade.JOAO_PESSOA;
+    Cidade D = Cidade.NATAL;
     LocalDate hoje = LocalDate.of(2026, 11, 23);
 
     @Test
