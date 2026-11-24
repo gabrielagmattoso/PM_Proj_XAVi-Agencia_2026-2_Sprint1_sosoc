@@ -1,0 +1,87 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
+
+public class VooTest{
+
+    private static final LocalDate DATA = LocalDate.of(2026, 12, 1);
+    private static final double PRECO = 500.0;
+    private static final int CAPACIDADE = 150;
+
+    private Rota criarRota(){
+        Rota rota = new Rota("ABCD");
+        rota.DefinirOrigem(Cidade.BELO_HORIZONTE);
+        rota.DefinirDestino(Cidade.RECIFE);
+        return rota;
+    }
+
+    private Voo criarVoo(){
+        return new Voo(criarRota(), DATA, PRECO);
+    }
+
+    private void reservar(Voo voo, int vezes) {
+    for (int i = 0; i < vezes; i++) {
+        voo.reservarVaga();
+    }
+}
+
+    @Test void vooNovoTemVaga() {
+        Voo voo = criarVoo();
+        assertTrue(voo.temVaga());
+    }
+
+    @Test
+    void com149ReservasAindaTemVaga() {
+        Voo voo = criarVoo();
+        reservar(voo, CAPACIDADE - 1);
+        assertTrue(voo.temVaga());
+    }
+    
+    @Test
+    void com150ReservasNaoTemVaga() {
+        Voo voo = criarVoo();
+        reservar(voo, CAPACIDADE);
+        assertFalse(voo.temVaga());
+    }
+
+    @Test
+    void reservaEmVooComVagaMantemVaga() {
+        Voo voo = criarVoo();
+        voo.reservarVaga();
+        assertTrue(voo.temVaga());
+    }
+
+    @Test
+    void reservaEmVooLotadoContinuaSemVaga() {
+        Voo voo = criarVoo();
+        reservar(voo, CAPACIDADE);
+        voo.reservarVaga(); // tentativa 151
+        assertFalse(voo.temVaga());
+    }
+
+    @Test
+    void getDataDevolveDataDoConstrutor() {
+        Voo voo = criarVoo();
+        assertEquals(DATA, voo.getData());
+    }
+
+     @Test
+    void getPrecoBaseDevolvePrecoDoConstrutor() {
+        Voo voo = criarVoo();
+        assertEquals(PRECO, voo.getPrecoBase(), 0.001); // 0.001 = tolerância do double
+    }
+
+    @Test
+    void getOrigemEGetDestinoDevolvemCidadesDaRota() {
+        Voo voo = criarVoo();
+        assertEquals(Cidade.BELO_HORIZONTE, voo.getOrigem());
+        assertEquals(Cidade.RECIFE, voo.getDestino());
+    }
+
+    @Test
+    void getCodigoDevolveCodigoDaRota() {
+        Voo voo = criarVoo();
+        assertEquals("ABCD", voo.getCodigo());
+    }
+
+}
