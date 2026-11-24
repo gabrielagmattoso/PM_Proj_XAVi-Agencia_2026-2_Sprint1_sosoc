@@ -35,12 +35,15 @@ public class Cliente {
         return bilhetes ;
     }
 
-    public Double totalGasto (){ 
-          if (this.bilhetes.isEmpty()) {
+    public double totalGasto() {
+        if (bilhetes.isEmpty()) {
             throw new IllegalStateException("O cliente não possui bilhetes cadastrados.");
         }
-        return this.bilhetes.get(bilhetes.size() - 1).precoVenda();
-
+        double total = 0;
+        for (Bilhete b : bilhetes) {
+            total += b.precoVenda();
+        }
+        return total;
     }
 
 }

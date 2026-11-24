@@ -53,10 +53,10 @@ public class VooTest{
     }
 
     @Test
-    void reservaEmVooLotadoContinuaSemVaga() {
+    void reservaEmVooLotadoLancaExcecao() {
         Voo voo = criarVoo();
         reservar(voo, CAPACIDADE);
-        voo.reservarVaga(); // tentativa 151
+        assertThrows(IllegalArgumentException.class, () -> voo.reservarVaga());
         assertFalse(voo.temVaga());
     }
 
