@@ -41,8 +41,8 @@ public class ClienteTest {
         Bilhete primeiroBilhete = new Bilhete(cliente);
         Bilhete ultimoBilhete = new Bilhete(cliente);
 
-        cliente.adicionarBilhete(primeiroBilhete);
-        cliente.adicionarBilhete(ultimoBilhete);
+        cliente.registrarBilhete(primeiroBilhete);
+        cliente.registrarBilhete(ultimoBilhete);
 
         assertEquals(2, cliente.getBilhetes().size());
         assertTrue(cliente.getBilhetes().contains(primeiroBilhete));
