@@ -1,3 +1,4 @@
+package src;
 public class Rota {
     private String codigoRota;
 

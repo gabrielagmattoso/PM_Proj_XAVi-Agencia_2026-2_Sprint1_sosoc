@@ -1,3 +1,4 @@
+package src;
 public enum Cidade {
     BELO_HORIZONTE,
     RIO_DE_JANEIRO,
