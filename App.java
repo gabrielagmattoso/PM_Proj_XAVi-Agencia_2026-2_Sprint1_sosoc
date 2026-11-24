@@ -17,7 +17,7 @@ public class App{
     }
 
     public void cadastrarVoos(){
-
+        //todo
     }
 
     public void procurarVoos(){
@@ -29,7 +29,7 @@ public class App{
     }
 
     public void comprarBilhete(){
-
+        //todo
     }
 
     public static void main(String[] args){
