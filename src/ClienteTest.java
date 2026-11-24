@@ -1,3 +1,5 @@
+package src;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +26,7 @@ public class ClienteTest {
         Cliente cliente1 = new Cliente("Maria", "Oliveira");
         Cliente cliente2 = new Cliente("Carlos", "Santos");
 
-        assertEquals(cliente1.getId() + 1, cliente2.getId());
+        assertEquals(cliente1.getRegistro() + 1, cliente2.getRegistro());
     }
 
     @Test
