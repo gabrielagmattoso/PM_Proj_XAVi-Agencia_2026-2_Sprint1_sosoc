@@ -4,78 +4,48 @@ import org.junit.jupiter.api.Test;
 
 public class RotaTest {
 
-    private final Rota rota = new Rota("R001");
-
     @Test
-    void construtorDeveAceitarCodigoComQuatroCaracteres() {
-        assertEquals("R001", rota.getCodigo());
-    }
-
-    @Test
-    void construtorDeveRejeitarCodigoCurtoELongo() {
-        assertThrows(IllegalArgumentException.class, () -> new Rota("ABC"));
-        assertThrows(IllegalArgumentException.class, () -> new Rota("ABCDE"));
-    }
-
-    @Test
-    void origemEDestinoDevemSerGuardados() {
-        rota.DefinirOrigem(Cidade.BELO_HORIZONTE);
-        rota.DefinirDestino(Cidade.FORTALEZA);
+    void construtorGuardaOrigemEDestino() {
+        Rota rota = new Rota(Cidade.BELO_HORIZONTE, Cidade.FORTALEZA);
         assertSame(Cidade.BELO_HORIZONTE, rota.getOrigem());
         assertSame(Cidade.FORTALEZA, rota.getDestino());
     }
 
     @Test
-    void naoDeveDefinirOrigemDuasVezes() {
-        rota.DefinirOrigem(Cidade.BELO_HORIZONTE);
-        assertThrows(IllegalArgumentException.class, () -> rota.DefinirOrigem(Cidade.RECIFE));
+    void construtorRejeitaCidadesNulasOuIguais() {
+        assertThrows(IllegalArgumentException.class, () -> new Rota(null, Cidade.FORTALEZA));
+        assertThrows(IllegalArgumentException.class, () -> new Rota(Cidade.BELO_HORIZONTE, null));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Rota(Cidade.RECIFE, Cidade.RECIFE));
     }
 
     @Test
-    void naoDeveDefinirDestinoDuasVezes() {
-        rota.DefinirDestino(Cidade.FORTALEZA);
-        assertThrows(IllegalArgumentException.class, () -> rota.DefinirDestino(Cidade.RECIFE));
+    void codigoRepresentaOsCodigosDeOrigemEDestino() {
+        Rota rota = new Rota(Cidade.BELO_HORIZONTE, Cidade.FORTALEZA);
+        assertEquals("1321", rota.getCodigo());
     }
 
     @Test
-    void origemNaoPodeSerIgualAoDestino() {
-        rota.DefinirDestino(Cidade.RECIFE);
-        assertThrows(IllegalArgumentException.class, () -> rota.DefinirOrigem(Cidade.RECIFE));
+    void deCodigoReconstruiRota() {
+        Rota rota = Rota.deCodigo("1350");
+        assertSame(Cidade.BELO_HORIZONTE, rota.getOrigem());
+        assertSame(Cidade.RECIFE, rota.getDestino());
+        assertEquals("1350", rota.getCodigo());
     }
 
     @Test
-    void destinoNaoPodeSerIgualAOrigem() {
-        rota.DefinirOrigem(Cidade.RECIFE);
-        assertThrows(IllegalArgumentException.class, () -> rota.DefinirDestino(Cidade.RECIFE));
+    void deCodigoRejeitaCodigoInvalido() {
+        assertThrows(IllegalArgumentException.class, () -> Rota.deCodigo(null));
+        assertThrows(IllegalArgumentException.class, () -> Rota.deCodigo("ABC"));
+        assertThrows(IllegalArgumentException.class, () -> Rota.deCodigo("9999"));
+        assertThrows(IllegalArgumentException.class, () -> Rota.deCodigo("1313"));
     }
 
     @Test
-    void minutosDevemAceitarSessentaEUm() {
-        rota.DefinirMinutosRota(61);
-        assertEquals(61, rota.getMinutosRota());
-    }
-
-    @Test
-    void minutosDevemRejeitarSessentaENegativo() {
-        assertThrows(IllegalArgumentException.class, () -> rota.DefinirMinutosRota(60));
-        assertThrows(IllegalArgumentException.class, () -> rota.DefinirMinutosRota(-10));
-    }
-
-    @Test
-    void gettersDevemLancarExcecaoQuandoNaoDefinidos() {
-        assertThrows(IllegalArgumentException.class, () -> rota.getOrigem());
-        assertThrows(IllegalArgumentException.class, () -> rota.getDestino());
-        assertThrows(IllegalArgumentException.class, () -> rota.getMinutosRota());
-    }
-
-    @Test
-    void resetarDeveLimparEPermitirRedefinir() {
-        rota.DefinirOrigem(Cidade.BELO_HORIZONTE);
-        rota.DefinirDestino(Cidade.FORTALEZA);
-        rota.DefinirMinutosRota(150);
-        rota.ResetarRota();
-        assertThrows(IllegalArgumentException.class, () -> rota.getOrigem());
-        assertDoesNotThrow(() -> rota.DefinirOrigem(Cidade.FORTALEZA));
-        assertEquals("R001", rota.getCodigo());
+    void validarCodigoIndicaSeCodigoPodeSerDecodificado() {
+        assertTrue(Rota.validarCodigo("1350"));
+        assertFalse(Rota.validarCodigo(null));
+        assertFalse(Rota.validarCodigo("13A0"));
+        assertFalse(Rota.validarCodigo("9999"));
     }
 }

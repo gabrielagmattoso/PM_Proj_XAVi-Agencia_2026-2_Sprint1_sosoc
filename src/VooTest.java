@@ -10,10 +10,7 @@ public class VooTest{
     private static final int CAPACIDADE = 150;
 
     private Rota criarRota(){
-        Rota rota = new Rota("ABCD");
-        rota.DefinirOrigem(Cidade.BELO_HORIZONTE);
-        rota.DefinirDestino(Cidade.RECIFE);
-        return rota;
+        return new Rota(Cidade.BELO_HORIZONTE, Cidade.RECIFE);
     }
 
     private Voo criarVoo(){
@@ -82,7 +79,7 @@ public class VooTest{
     @Test
     void getCodigoDevolveCodigoDaRota() {
         Voo voo = criarVoo();
-        assertEquals("ABCD", voo.getCodigo());
+        assertEquals("1350", voo.getCodigo());
     }
 
 }

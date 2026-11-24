@@ -13,6 +13,10 @@ class BilheteTest {
     Cidade D = Cidade.NATAL;
     LocalDate hoje = LocalDate.of(2026, 11, 23);
 
+    private Rota criarRota(Cidade origem, Cidade destino) {
+        return new Rota(origem, destino);
+    }
+
     @Test
     void construtorSemClienteLancaExcecao() {
         assertThrows(IllegalArgumentException.class, () -> new Bilhete(null));
@@ -32,12 +36,8 @@ class BilheteTest {
 
     @Test
     void origemEDestinoComDoisVoos() {
-        Rota r1 = new Rota("1234");
-        r1.DefinirOrigem(A);
-        r1.DefinirDestino(B);
-        Rota r2 = new Rota("1234");
-        r2.DefinirOrigem(B);
-        r2.DefinirDestino(C);
+        Rota r1 = criarRota(A, B);
+        Rota r2 = criarRota(B, C);
 
         Bilhete b = new Bilhete(cliente);
         b.adicionarVoo(new Voo(r1, hoje, 100));
@@ -48,12 +48,8 @@ class BilheteTest {
 
     @Test
     void consecutivosDiaSeguinte() {
-        Rota r1 = new Rota("1234");
-        r1.DefinirOrigem(A);
-        r1.DefinirDestino(B);
-        Rota r2 = new Rota("1234");
-        r2.DefinirOrigem(B);
-        r2.DefinirDestino(C);
+        Rota r1 = criarRota(A, B);
+        Rota r2 = criarRota(B, C);
 
         Voo v1 = new Voo(r1, hoje, 100);
         Voo v2 = new Voo(r2, hoje.plusDays(1), 100);
@@ -62,12 +58,8 @@ class BilheteTest {
 
     @Test
     void naoConsecutivosDoisDiasDepois() {
-        Rota r1 = new Rota("1234");
-        r1.DefinirOrigem(A);
-        r1.DefinirDestino(B);
-        Rota r2 = new Rota("1234");
-        r2.DefinirOrigem(B);
-        r2.DefinirDestino(C);
+        Rota r1 = criarRota(A, B);
+        Rota r2 = criarRota(B, C);
 
         Voo v1 = new Voo(r1, hoje, 100);
         Voo v2 = new Voo(r2, hoje.plusDays(2), 100);
@@ -76,12 +68,8 @@ class BilheteTest {
 
     @Test
     void naoConsecutivosOrigemDiferenteDoDestino() {
-        Rota r1 = new Rota("1234");
-        r1.DefinirOrigem(A);
-        r1.DefinirDestino(B);
-        Rota r2 = new Rota("1234");
-        r2.DefinirOrigem(C);
-        r2.DefinirDestino(A);
+        Rota r1 = criarRota(A, B);
+        Rota r2 = criarRota(C, A);
 
         Voo v1 = new Voo(r1, hoje, 100);
         Voo v2 = new Voo(r2, hoje, 100);
@@ -90,9 +78,7 @@ class BilheteTest {
 
     @Test
     void adicionarVooSemVagaRetornaFalse() {
-        Rota r1 = new Rota("1234");
-        r1.DefinirOrigem(A);
-        r1.DefinirDestino(B);
+        Rota r1 = criarRota(A, B);
         Voo lotado = new Voo(r1, hoje, 100);
         for (int i = 0; i < 150; i++) {
             lotado.reservarVaga();
@@ -105,12 +91,8 @@ class BilheteTest {
 
     @Test
     void adicionarVooNaoConsecutivoRetornaFalse() {
-        Rota r1 = new Rota("1234");
-        r1.DefinirOrigem(A);
-        r1.DefinirDestino(B);
-        Rota r2 = new Rota("1234");
-        r2.DefinirOrigem(C);
-        r2.DefinirDestino(D);
+        Rota r1 = criarRota(A, B);
+        Rota r2 = criarRota(C, D);
 
         Bilhete b = new Bilhete(cliente);
         b.adicionarVoo(new Voo(r1, hoje, 100));
