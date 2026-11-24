@@ -23,6 +23,28 @@ public class VooTest{
     }
 }
 
+    @Test
+    void construtorRejeitaRotaNula() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Voo(null, DATA, PRECO));
+    }
+
+    @Test
+    void construtorRejeitaDataNula() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Voo(criarRota(), null, PRECO));
+    }
+
+    @Test
+    void construtorRejeitaPrecoBaseInvalido() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Voo(criarRota(), DATA, 0));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Voo(criarRota(), DATA, -1));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Voo(criarRota(), DATA, Double.NaN));
+    }
+
     @Test void vooNovoTemVaga() {
         Voo voo = criarVoo();
         assertTrue(voo.temVaga());
