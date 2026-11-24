@@ -1,39 +1,41 @@
-
 package src;
-import java.util.List;
+
 import java.util.ArrayList;
-public class Cliente { 
-    private int registro;
+import java.util.List;
+
+public class Cliente implements Relatorio {
+    private static int proximoRegistro = 1;
+
+    private final int registro;
     private String nome;
     private String sobrenome;
     private List<Bilhete> bilhetes;
-    private static int proximoRegistro = 1;
 
-    public Cliente(String nome , String sobrenome ){
-        this.registro = proximoRegistro++ ;
-        this.nome = nome ;
+    public Cliente(String nome, String sobrenome) {
+        this.registro = proximoRegistro++;
+        this.nome = nome;
         this.sobrenome = sobrenome;
         this.bilhetes = new ArrayList<>();
     }
 
-    public int  getRegistro (){
+    public int getRegistro() {
         return registro;
     }
 
-    public String getNome (){
+    public String getNome() {
         return nome;
     }
 
-    public String getSobrenome (){
+    public String getSobrenome() {
         return sobrenome;
     }
 
-    public void registrarBilhete (Bilhete bilhete){
-        bilhetes.add(bilhete);
+    public List<Bilhete> getBilhetes() {
+        return bilhetes;
     }
 
-    public List<Bilhete> getBilhetes(){
-        return bilhetes ;
+    public void registrarBilhete(Bilhete bilhete) {
+        bilhetes.add(bilhete);
     }
 
     public double totalGasto() {
@@ -47,4 +49,18 @@ public class Cliente {
         return total;
     }
 
+    @Override
+    public String gerarRelatorio() {
+        String texto = "Cliente: " + nome + " " + sobrenome + " (registro " + registro + ")\n";
+
+        if (bilhetes.isEmpty()) {
+            return texto + "Nenhum bilhete comprado.";
+        }
+
+        for (Bilhete b : bilhetes) {
+            texto += b.getCodigo() + ": " + b.getOrigem() + " -> " + b.getDestino()
+                    + " - R$ " + b.precoVenda() + "\n";
+        }
+        return texto + "Total gasto: R$ " + totalGasto();
+    }
 }
