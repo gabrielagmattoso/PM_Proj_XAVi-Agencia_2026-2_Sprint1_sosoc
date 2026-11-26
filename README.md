@@ -19,3 +19,15 @@ Sistema de gerenciamento da XAVi (Xulambs Agência de Viagens), desenvolvido com
 **Status:** classe `Voo` e testes (`VooTest.java`) concluídos. Os 9 testes passam, mas após ajustar erros pontuais cometidos.
 - Primeira execução: 5 testes passaram e 4 falharam (os de getters). A causa estava no próprio teste, e não no `Voo`: os valores usados para criar o voo e a rota eram diferentes dos valores esperados nas verificações. Corrigido, e todos passam.
 
+## Classe 'Agencia'
+### 25/11/2026
+**Branch:** 'dudaSilva/Agencia'
+**Arquivo:** 'Agencia.java'
+**Status:** método `cadastrarCliente()` implementado.
+
+**O que foi feito**
+- `cadastrarCliente()`: lê nome e sobrenome pelo teclado (`Scanner`), recusa valores vazios, cria o `Cliente` e o guarda numa lista.
+- Campos novos em `Agencia`: `private final List<Cliente> clientes;`, `private final List<Voo> voos;` e `private final Scanner entrada;`, que foram inicializados no construtor.
+
+**Pendências**
+- `criarBilhete()`

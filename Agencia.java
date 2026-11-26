@@ -5,9 +5,15 @@ import java.util.Scanner;
 
 public class Agencia{
     private final List<Rota> rotas;
+    private final List<Cliente> clientes;
+    private final List<Voo> voos;
+    private final Scanner entrada;
 
     public Agencia(){
         rotas = new ArrayList<>();
+        clientes = new ArrayList<>();
+        voos = new ArrayList<>();
+        entrada = new Scanner(System.in);
     }
 
     public void mostrarMenu(){
@@ -26,6 +32,19 @@ public class Agencia{
     }
 
     public void cadastrarCliente(){
+        System.out.print("Nome: ");
+        String nome = entrada.nextLine().trim();
+        System.out.print("Sobrenome: ");
+        String sobrenome = entrada.nextLine().trim();
+
+        if (nome.isEmpty() || sobrenome.isEmpty()) {
+            System.out.println("Nome e sobrenome são obrigatórios.");
+            return;
+        }
+
+        Cliente cliente = new Cliente(nome, sobrenome);
+        clientes.add(cliente);
+        System.out.println("Cliente cadastrado. Registro: " + cliente.getRegistro());
 
     }
 
