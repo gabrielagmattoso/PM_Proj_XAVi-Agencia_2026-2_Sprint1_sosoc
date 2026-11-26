@@ -31,3 +31,12 @@ Sistema de gerenciamento da XAVi (Xulambs Agência de Viagens), desenvolvido com
 
 **Pendências**
 - `criarBilhete()`
+
+## Classe 'Agencia'
+### 26/11/2026
+**Branch:** 'dudaSilva/Agencia'
+**Arquivo:** 'Agencia.java'
+**Status:** método `criarBilhete()`implementado.
+
+**O que foi feito**
+- `criarBilhete()`: Pede e confere a existência do registro do cliente. Avisa sobre clientes ou voos não cadastrados. Cria o objeto `bilhete` e pede os voos de interesse, que são adicionados quando válidos. Verifica `bilhete.getVoos().isEmpty()` e em caso contrário, cria o bilhete. Para evitar que *NumberFormatException* quebre o código, foi feito uso de `try{}` e `catch{}`.

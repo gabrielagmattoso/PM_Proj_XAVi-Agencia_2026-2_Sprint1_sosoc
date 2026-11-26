@@ -75,7 +75,52 @@ public class Agencia{
 
     }
 
-    public void criarBilhete(){
+    public Bilhete criarBilhete(){
+        try {
+            System.out.print("Digite o registro do cliente: ");
+            int registro = Integer.parseInt(entrada.nextLine().trim());
+
+            Cliente cliente = null;
+            for (Cliente c : clientes){
+                if (c.getRegistro() == registro) {
+                    cliente = c;
+                }
+            }
+            if (cliente == null || voos.isEmpty()){
+                System.out.println("Cliente ou voos não cadastrados.");
+                return null;
+            }
+
+            Bilhete bilhete = new Bilhete(cliente);
+            int opcao = -1;
+            while (opcao != 0) {
+                for (int i = 0; i < voos.size(); i++) {
+                    System.out.println((i + 1) + " - Origem: " + voos.get(i).getOrigem() + " / Destino: " + voos.get(i).getDestino() + "/ Data: " + voos.get(i).getData());
+                }
+                System.out.print("Voo desejado (digite 0 para finalizar): ");
+                opcao = Integer.parseInt(entrada.nextLine().trim());
+
+                if (opcao != 0) {
+                    if (opcao < 1 || opcao > voos.size()) {
+                        System.out.println("Opção inválida.");
+                    } else if (!bilhete.adicionarVoo(voos.get(opcao - 1))) {
+                        System.out.println("Voo indisponivel.");
+                    }
+                }
+            }
+
+            if (bilhete.getVoos().isEmpty()) {
+                System.out.println("Bilhete não criado.");
+                return null;
+            }
+            System.out.println("Bilhete " + bilhete.getCodigo() + ", no valor de R$" + String.format("%.2f", bilhete.precoVenda()) + " criado.");
+            return bilhete;
+        }
+
+        catch (NumberFormatException e) {
+            System.out.println("Entrada inválida.");
+            return null;
+        }
 
     }
 
